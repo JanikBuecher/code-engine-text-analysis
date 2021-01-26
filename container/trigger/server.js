@@ -61,14 +61,14 @@ app.post("/events/cos",function (req, res, next){
 
       console.log( `stderr: ${ibm4.stderr.toString()}` );
       console.log( `stdout: ${ibm4.stdout.toString()}` );
-      
+
       // executing the batch job
       console.log("Executing jobrun...");
       const ibm5 = spawnSync( 'ibmcloud', [ 'ce', 'jobrun', 'submit' , '-n', `jobrun-vir-scan-${id}`, '--job', 'vir-scan', '-e', `COS_BUCKET_ENTRY=${source_bucket}`,'-e', `COS_FILE=${source_object}` ] );
 
       console.log( `stderr: ${ibm5.stderr.toString()}` );
       console.log( `stdout: ${ibm5.stdout.toString()}` );
-      return 'OK'
+      res.end('OK')
     }
    
    
