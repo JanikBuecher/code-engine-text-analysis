@@ -113,4 +113,5 @@ dist
 .yarn/build-state.yml
 .pnp.*
 
-*.sh
+# Ignore .sh files
+*/*.sh
