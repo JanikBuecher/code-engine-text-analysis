@@ -42,7 +42,7 @@ app()
 
 async function app() {
 
-   
+  // getting the file from COS and writing the file to the disk for scanning 
   await getItem(process.env.COS_BUCKET_ENTRY, process.env.COS_FILE)
   
   fs.readdirSync('./data/').forEach(file => {
@@ -69,7 +69,7 @@ function getItem(bucketName, itemName) {
       .promise()
       .then((data) => {
         if (data != null) {
-          
+          // writing the file to the disk for scanning
           fs.writeFileSync(`./data/${itemName}`, data.Body);
           console.log("saving item...")
           resolve()
@@ -92,8 +92,12 @@ async function scan(folder, filename) {
       const clamscan = await new NodeClam().init(options);
       const data = fs.readFileSync(folder + filename, {encoding:'utf8', flag:'r'}); 
       const {is_infected, file, viruses} = await clamscan.is_infected(folder + filename);
+      // debug log
       console.log(`Is infected: ${is_infected}`);
       
+
+      // moving the file to the right Bucket (currently disabled)
+
       // await doDeleteObject(process.env.COS_BUCKET_ENTRY, filename)
       
       // if (is_infected){
@@ -102,6 +106,7 @@ async function scan(folder, filename) {
       //   await doCreateObject(process.env.COS_BUCKET_CLEAN, filename, data)
       // }
 
+      // deleting file from disk
       fs.unlinkSync(folder+ filename);
       
   } catch (err) {
