@@ -51,7 +51,7 @@ POLICY_ID=$(ibmcloud iam authorization-policy-create codeengine \
 
 # Create the app && save its URL for later
 ibmcloud ce app create -n cos-app --image ${REGISTRY}/trigger \
-  --min-scale=1 --max-scale=1 -e API_KEY=jkA4s62JFXw_AhXM3O60KmNfy1EVqP-IjY0SrMJTc8PS
+  --min-scale=1 --max-scale=1 -e API_KEY=$API_KEY
 #URL=$(ibmcloud ce app get --output jsonpath='{.status.url}' --name cos-app)
 
 # Setup the COS Event Source
