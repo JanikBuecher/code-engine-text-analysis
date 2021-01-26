@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  
   $('.loader-wrapper').addClass('is-active');
   getuploadedFiles();
   $("#analyzebtn").attr("disabled", true);
@@ -154,37 +155,39 @@ function readResults(){
     url: "/analyzetext",
     success: function (response) {
       $("#analyzebtn").removeAttr("disabled");
-      //console.log(response);
+      
       var data = JSON.parse(response.data);
       var jsonDict = {};
       //console.log(data);
       $("p.card-footer-item").each(function (index) {
-        console.log( index + ": " + $( this ).text() );
+        //console.log( index + ": " + $( this ).text() );
         var id = $(this).attr("id");
         //console.log(id);
         var value = "results/" + id.toString() + ".json";
         //console.log(value);
+        //console.log(data);
+        //console.log(data[value]);
         //console.log(Object.keys(data).length);
         if (Object.keys(data).length !== 0 && data.hasOwnProperty(value)) {
-        var result = data[value].keywords;
+        var result = data[value].images[0].classifiers[0].classes;
         jsonDict[index] = JSON.stringify(data[value],null,4);
-        console.log(result);
+        //console.log(result);
         let parent = $(this).parent(".card-footer");
         if (result.length > 1) {
-             parent.append('<a class="card-footer-item table-toggle">Keywords<span class="icon"><i class="fas fa-angle-down" aria-hidden="true"></i></span></a><br>')
+             parent.append('<a class="card-footer-item table-toggle">Classes<span class="icon"><i class="fas fa-angle-down" aria-hidden="true"></i></span></a><br>')
              parent.append('<a class="card-footer-item div-toggle is-pulled-right">JSON&lt;\/&gt;</a><br>')
              parent.after(
               '<textarea class="textarea code-editor is-hidden" rows="10" readonly></textarea>');
              parent.after(
-              '<table class="table is-striped is-fullwidth is-hidden"><thead><tr><th>Keyword</th><th>Relevance</th><tbody></tbody></table>');
+              '<table class="table is-striped is-fullwidth is-hidden"><thead><tr><th>Class</th><th>Score</th><tbody></tbody></table>');
           for (var i = 0; i < result.length; i++) {
                parent.siblings(".table")
               .children("tbody")
               .append(
                 "<tr><td>" +
-                  result[i].text +
+                  result[i].class +
                   "</td><td>" +
-                  result[i].relevance +
+                  result[i].score +
                   "</td></tr>"
               );
           }
@@ -210,7 +213,7 @@ function readResults(){
 }
   $("#analyzebtn").click(function () {
     $("#analyzebtn").attr("disabled", true);
-    $(".tag").text("analyzeing...");
+    $(".tag").text("analyzing...");
     getuploadedFiles();
   });
 
@@ -233,7 +236,7 @@ function getuploadedFiles(){
       url: "/items",
       success: function (response) {
         $("#column-multiline").empty();
-        //console.log(response);
+        
         if(response.data.includes("error") ) {
           showNotification("An error occurred, check your backend connection to cloud services", "is-danger");
           $("#analyzebtn").attr("disabled", true);
@@ -250,7 +253,9 @@ function getuploadedFiles(){
         }
         for (var i = 0; i < Object.keys(data).length; i++) {
           var buffer = Object.values(data)[i];
-          var str = atob(buffer).substring(0,150)+"...";
+          
+          var str = buffer
+          //console.log(str)
           let fileName = Object.keys(data)[i].split("/")[1];
           $("#column-multiline").append(
             '<div class="column is-one-quarter-desktop is-half-tablet">\
@@ -264,8 +269,7 @@ function getuploadedFiles(){
                 fileName +
                 '" class="is-pulled-right"><span class="icon"><i class="fas fa-trash-alt"></i> </span></a> \
                 <br>\
-    <p class="subtitle">'+ str +' \
-    </p>\
+    <img class="subtitle" src="data:image/jpeg;base64,'+ str +'"/>\
               </div>\
           <footer class="card-footer">\
               <p id="' +

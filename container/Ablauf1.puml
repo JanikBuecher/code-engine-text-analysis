@@ -1,0 +1,33 @@
+@startuml
+!pragma teoz true
+
+title Ablauf
+
+participant "Job" as job
+participant "ClamAV" as clam
+
+activate job
+job -> clam : Send file to scan
+
+activate clam
+
+hnote over job: wait for response
+
+
+hnote over clam: Scanning file
+||45||
+return send back status of file
+
+alt file is clean
+hnote over job: Move file to clean bucket
+
+else file is infected
+hnote over job: Move file to dirty bucket
+
+deactivate job
+
+
+
+
+
+@enduml
