@@ -126,10 +126,7 @@ This tutorial requires to:
    ```
 2. You will also need to provide the application with your Bucket names where you want to move the files, as well as your COS endpoint. Define a configmap to hold the bucket name and the endpoint as the information isn't sensitive. ConfigMaps are a Kubernetes object, which allows you to decouple configuration artifacts from image content to keep containerized applications portable. You could create this configmap from a file or from a key value pair -- for now we'll use a key value pair with the `--from-literal` flag.
    ```console
-      $ ibmcloud code-engine configmap create --name virus-scan-configuration                    --from-literal=COS_BUCKET_DIRTY=<COS_BUCKET_NAME>
-      --from-literal=COS_BUCKET_CLEAN=<COS_BUCKET_NAME>
-      --from-literal=COS_BUCKET_ENTRY=<COS_BUCKET_NAME>
-      --from-literal=COS_ENDPOINT=<COS_ENDPOINT>
+      $ ibmcloud code-engine configmap create --name virus-scan-configuration --from-literal=COS_BUCKET_DIRTY=<COS_BUCKET_NAME> --from-literal=COS_BUCKET_CLEAN=<COS_BUCKET_NAME> --from-literal=COS_BUCKET_ENTRY=<COS_BUCKET_NAME> --from-literal=COS_ENDPOINT=<COS_ENDPOINT>
    ```
 3. With the configmap defined, you can now update the job by asking Code Engine to set environment variables in the runtime of the job based on the values in the configmap. Update the job with the following command:
    ```console
@@ -138,4 +135,4 @@ This tutorial requires to:
 
 ### Step 6: Try it out
 
-When you upload a file into your entry bucket, it will be scanned for viruses and then moved to either the clean or dirty bucket
+When you upload a file into your entry bucket, it will be scanned for viruses and then moved to either the clean or dirty bucket.
