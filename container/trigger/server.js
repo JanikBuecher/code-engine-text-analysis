@@ -50,7 +50,7 @@ app.post("/events/cos",function (req, res, next){
 
       //target the right region and group
       console.log("Executing target...");
-      const ibm2 = spawnSync( 'ibmcloud', [ 'target', '-g', 'default', '-r', 'us-south' ] );
+      const ibm2 = spawnSync( 'ibmcloud', [ 'target', '-g', process.env.GROUP, '-r', process.env.REGION ] );
 
       console.log( `stderr: ${ibm2.stderr.toString()}` );
       console.log( `stdout: ${ibm2.stdout.toString()}` );

@@ -1,5 +1,6 @@
 # Scanning COS Files for infections when uploaded with Code Engine
 
+Provide Virus-Scanning as a Service for usage of serverless
 Welcome to this little tutorial on how to scan files for computer viruses in the IBM Cloud Object Storage (COS) with IBM Code Engine.
 
 ## Prerequisites
@@ -82,7 +83,7 @@ This tutorial requires to:
    3. Paste them into a text editor and copy the **resource_instance_id** and **apikey**
 5. Run the setup **RUN.sh** script
    ```console
-       $ bash RUN.sh -r <YOUR_REGISTRY> -k <YOUR_API_KEY> -p <YOUR_PROJECT_NAME> -b <YOUR_ENTRY_BUCKET_NAME> -c <YOUR_RESOURCE_INSTANCE_ID>
+       $ bash RUN.sh -r <YOUR_REGISTRY> -k <YOUR_API_KEY> -p <YOUR_PROJECT_NAME> -b <YOUR_ENTRY_BUCKET_NAME> -c <YOUR_RESOURCE_INSTANCE_ID> -g <YOUR_GROUP> -a <YOUR_REGION>
    ```
 
 ### Step 4: Create the virus-scan job
