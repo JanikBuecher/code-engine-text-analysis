@@ -99,9 +99,9 @@ This tutorial requires to:
    ```console
        $ docker push <YOUR_REGISTRY>/<YOUR_IMAGE_NAME>
    ```
-4. Create the virus-job in IBM Code Engine
+4. Create the virus-job in IBM Code Engine with 2Gi of RAM, because the anti-virus software needs that much
    ```console
-      $ ibmcloud ce job create -n vir-scan -i janikbuecheribm/clam
+      $ ibmcloud ce job create -n vir-scan -i janikbuecheribm/clam --memory 2Gi
    ```
 
 ### Step 5: Connect the virus-scan job with your IBM COS instance
