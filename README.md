@@ -138,4 +138,4 @@ This tutorial requires to:
 
 ### Step 6: Try it out
 
-When you upload into your entry bucket, it will be scanned for viruses and then moved to either the clean or dirty bucket
+When you upload a file into your entry bucket, it will be scanned for viruses and then moved to either the clean or dirty bucket
