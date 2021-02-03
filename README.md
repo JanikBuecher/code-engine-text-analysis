@@ -1,6 +1,5 @@
 # How to provide Virus-Scanning as a Service utilizing the serverless IBM Code Engine
 
-Provide Virus-Scanning as a Service for usage of serverless
 Welcome to this little tutorial on how to scan files for computer viruses in the IBM Cloud Object Storage (COS) with IBM Code Engine.
 
 ## Architecture
