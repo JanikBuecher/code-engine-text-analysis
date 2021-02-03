@@ -120,5 +120,5 @@ This tutorial requires to:
    ```
 3. With the configmap defined, you can now update the job by asking Code Engine to set environment variables in the runtime of the job based on the values in the configmap. Update the job with the following command:
    ```console
-     $ ibmcloud code-engine job update --name vir-scan --env-from-configmap               virus-scan-configuration
+     $ ibmcloud code-engine job update --name vir-scan --env-from-configmap virus-scan-configuration
    ```
