@@ -1,9 +1,0 @@
-{
-  "apikey": "_spowNRohBmANJfJ6--kXXpDKGL8Ul6pQ_l_SD8Ix-hz",
-  "endpoints": "https://control.cloud-object-storage.cloud.ibm.com/v2/endpoints",
-  "iam_apikey_description": "Auto-generated for key 94e9848f-d1de-48f7-a2a9-fa72f40f42bc",
-  "iam_apikey_name": "cos-for-code-engine",
-  "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Writer",
-  "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/26247a9e0b3a8c78d5d2867054fd0c6f::serviceid:ServiceId-1811a9da-401e-4c3f-8763-c54e4cb6901c",
-  "resource_instance_id": "crn:v1:bluemix:public:cloud-object-storage:global:a/26247a9e0b3a8c78d5d2867054fd0c6f:b0cb489b-c076-4f25-a663-8b178006b9ca::"
-}
