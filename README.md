@@ -124,7 +124,7 @@ This tutorial requires to:
       $ ibmcloud code-engine job bind --name vir-scan --service-instance
         code-engine-cos --service-credential cos-for-code-engine --prefix COS
    ```
-2. You will also need to provide the application with your Bucket names where you want to move the files, as well as your COS endpoint. Define a configmap to hold the bucket name and the endpoint as the information isn't sensitive. ConfigMaps are a Kubernetes object, which allows you to decouple configuration artifacts from image content to keep containerized applications portable. You could create this configmap from a file or from a key value pair -- for now we'll use a key value pair with the `--from-literal` flag.
+2. You will also need to provide the job with your bucket names where you want to move the files, as well as your COS endpoint. Define a configmap to hold the bucket name and the endpoint as the information isn't sensitive. ConfigMaps are a Kubernetes object, which allows you to decouple configuration artifacts from image content to keep containerized applications portable. You could create this configmap from a file or from a key value pair -- for now we'll use a key value pair with the `--from-literal` flag.
    ```console
       $ ibmcloud code-engine configmap create --name virus-scan-configuration --from-literal=COS_BUCKET_DIRTY=<COS_BUCKET_NAME> --from-literal=COS_BUCKET_CLEAN=<COS_BUCKET_NAME> --from-literal=COS_BUCKET_ENTRY=<COS_BUCKET_NAME> --from-literal=COS_ENDPOINT=<COS_ENDPOINT>
    ```
