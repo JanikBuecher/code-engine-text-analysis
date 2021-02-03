@@ -1,9 +1,12 @@
-# Scanning COS Files for infections when uploaded with Code Engine
+# How to provide Virus-Scanning as a Service utilizing the serverless IBM Code Engine
 
 Provide Virus-Scanning as a Service for usage of serverless
 Welcome to this little tutorial on how to scan files for computer viruses in the IBM Cloud Object Storage (COS) with IBM Code Engine.
 
 ## Architecture
+
+First the user uploads a file to a specific bucket in his IBM COS instance. An application, running in IBM Code Engine is listening to this bucket and will trigger the virus-scan job when a file is uploaded.
+The virus-job is also running in IBM Code Engine and will pull the file and scan it for viruses. Then it will delete the file from the original bucket and will move it either to the clean or dirty bucket, where the infected files are quarantined.
 
 <img src="images/architecture.jpg" alt="drawing"/>
 
@@ -133,3 +136,7 @@ This tutorial requires to:
    ```console
      $ ibmcloud code-engine job update --name vir-scan --env-from-configmap virus-scan-configuration
    ```
+
+### Step 6: Try it out
+
+When you upload into your entry bucket, it will be scanned for viruses and then moved to either the clean or dirty bucket
