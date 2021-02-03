@@ -9,8 +9,6 @@ VOLUME /mnt/entry
 VOLUME /mnt/clean
 VOLUME /mnt/dirty
 
-ENV COS_BUCKET_CLEAN=clean1-bucket 
-ENV COS_BUCKET_DIRTY=dirt-bucket 
 
 RUN apk add clamav
 RUN apk add clamav-daemon
@@ -21,8 +19,7 @@ RUN freshclam
 
 
 RUN mkdir -p /usr/src/app/data 
-
-
+RUN mkdir -p /usr/src/app/infected
 # Create app directory
 WORKDIR /usr/src/app
 

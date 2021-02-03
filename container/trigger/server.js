@@ -57,7 +57,7 @@ app.post("/events/cos",function (req, res, next){
 
       // selecting the right code engine project
       console.log("Executing project...");
-      const ibm4 = spawnSync( 'ibmcloud', [ 'ce', 'project', 'select', '-n', 'vir_scan'] );
+      const ibm4 = spawnSync( 'ibmcloud', [ 'ce', 'project', 'select', '-n', process.env.PROJECT_NAME] );
 
       console.log( `stderr: ${ibm4.stderr.toString()}` );
       console.log( `stdout: ${ibm4.stdout.toString()}` );

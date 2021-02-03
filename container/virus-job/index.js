@@ -9,7 +9,7 @@ var config = {
     endpoint:
       process.env.COS_ENDPOINT ||
       "s3.us-south.cloud-object-storage.appdomain.cloud",
-    apiKeyId: process.env.COS_JOB_APIKEY,
+    apiKeyId: process.env.COS_APIKEY,
     ibmAuthEndpoint: "https://iam.cloud.ibm.com/identity/token",
     serviceInstanceId: "crn:v1:bluemix:public:cloud-object-storage:global:a/26247a9e0b3a8c78d5d2867054fd0c6f:397aa18a-951c-4e18-9a9d-912c700aec19:bucket:entry3-bucket",
   };
@@ -17,13 +17,13 @@ var cosClient = new myCOS.S3(config);
 const NodeClam = require('clamscan');
 const options = {
   remove_infected: false, // Removes files if they are infected
-  quarantine_infected: '/usr/src/app', // Move file here. remove_infected must be FALSE, though.
+  quarantine_infected: '/usr/src/app/infected', // Move file here. remove_infected must be FALSE, though.
   debug_mode: true, // This will put some debug info in your js console
   scan_recursively: true, // Choosing false here will save some CPU cycles
   clamscan: {
       path: '/usr/bin/clamscan', // I dunno, maybe your clamscan is just call "clam"
       scan_archives: false, // Choosing false here will save some CPU cyclese
-      active: true // you don't want to use this at all because it's evil
+      active: true // I use clamscan here, but you can try to get the clam daemon (clamd) to work
   },
   clamdscan: {
     socket: false, // Socket file for connecting via TCP
@@ -98,16 +98,19 @@ async function scan(folder, filename) {
 
       // moving the file to the right Bucket (currently disabled)
 
-      // await doDeleteObject(process.env.COS_BUCKET_ENTRY, filename)
+      await doDeleteObject(process.env.COS_BUCKET_ENTRY, filename)
       
-      // if (is_infected){
-      //   await doCreateObject(process.env.COS_BUCKET_DIRTY, filename, data)
-      // }else if (!is_infected){
-      //   await doCreateObject(process.env.COS_BUCKET_CLEAN, filename, data)
-      // }
+      if (is_infected){
+        await doCreateObject(process.env.COS_BUCKET_DIRTY, filename, data)
+        // deleting file from disk
+        fs.unlinkSync('/usr/src/app/infected/'+ filename);
+      }else if (!is_infected){
+        await doCreateObject(process.env.COS_BUCKET_CLEAN, filename, data)
+        // deleting file from disk
+        fs.unlinkSync(folder+ filename);
+      }
 
-      // deleting file from disk
-      fs.unlinkSync(folder+ filename);
+     
       
   } catch (err) {
       console.log(err)
