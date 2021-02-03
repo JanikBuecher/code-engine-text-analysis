@@ -5,6 +5,7 @@ RUN apk add curl
 RUN curl -fsSL https://clis.cloud.ibm.com/install/linux | sh
 
 RUN ibmcloud plugin install code-engine
+RUN ibmcloud plugin update code-engine
 
 # Create app directory
 WORKDIR /usr/src/app

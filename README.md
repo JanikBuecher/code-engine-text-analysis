@@ -77,13 +77,19 @@ This tutorial requires to:
    ```console
        $ docker push <YOUR_REGISTRY>/trigger
    ```
-4. Get the IBM COS `resource_instance_id` and `apikey`
+4. Get the IBM COS `resource_instance_id`
    1. Go to your IBM COS instance
    2. On the left pane under **Service credentials**, copy the credentials `cos-for-code-engine`
-   3. Paste them into a text editor and copy the **resource_instance_id** and **apikey**
-5. Run the setup **RUN.sh** script
+   3. Paste them into a text editor and copy the **resource_instance_id**
+5. Get an`IAM_APIKEY`
+   1. Go to the IBM Cloud Dashboard
+   2. On the top click on Manage->Access(IAM)
+   3. On the left pane click on **API keys**
+   4. Create a new API Key with a custom name
+   5. Copy the API Key **immediately** because this is the only time you can save it
+6. Run the setup **RUN.sh** script
    ```console
-       $ bash RUN.sh -r <YOUR_REGISTRY> -k <YOUR_API_KEY> -p <YOUR_PROJECT_NAME> -b <YOUR_ENTRY_BUCKET_NAME> -c <YOUR_RESOURCE_INSTANCE_ID> -g <YOUR_GROUP> -a <YOUR_REGION>
+       $ bash RUN.sh -r <YOUR_REGISTRY> -k <YOUR_IAM_API_KEY> -p <YOUR_PROJECT_NAME> -b <YOUR_ENTRY_BUCKET_NAME> -c <YOUR_RESOURCE_INSTANCE_ID> -g <YOUR_GROUP> -a <YOUR_REGION>
    ```
 
 ### Step 4: Create the virus-scan job
@@ -102,7 +108,7 @@ This tutorial requires to:
    ```
 4. Create the virus-job in IBM Code Engine with 2Gi of RAM, because the anti-virus software needs that much
    ```console
-      $ ibmcloud ce job create -n vir-scan -i janikbuecheribm/clam --memory 2Gi
+      $ ibmcloud ce job create -n vir-scan -i <YOUR_REGISTRY>/<YOUR_IMAGE_NAME> --memory 2Gi
    ```
 
 ### Step 5: Connect the virus-scan job with your IBM COS instance

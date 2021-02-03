@@ -9,7 +9,7 @@ var config = {
     endpoint:
       process.env.COS_ENDPOINT ||
       "s3.us-south.cloud-object-storage.appdomain.cloud",
-    apiKeyId: process.env.COS_APIKEY,
+    apiKeyId: process.env.COS_SECRET_APIKEY,
     ibmAuthEndpoint: "https://iam.cloud.ibm.com/identity/token",
     serviceInstanceId: "crn:v1:bluemix:public:cloud-object-storage:global:a/26247a9e0b3a8c78d5d2867054fd0c6f:397aa18a-951c-4e18-9a9d-912c700aec19:bucket:entry3-bucket",
   };

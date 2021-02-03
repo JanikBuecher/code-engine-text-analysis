@@ -43,14 +43,14 @@ app.post("/events/cos",function (req, res, next){
       console.log("Triggered");
       // Login into ibmcloud cli
       console.log("Executing login...");
-      const ibm = spawnSync( 'ibmcloud', [ 'login', '--apikey', process.env.API_KEY ] );
+      const ibm = spawnSync( 'ibmcloud', [ 'login', '--apikey', process.env.IAM_API_KEY ] );
 
       console.log( `stderr: ${ibm.stderr.toString()}` );
       console.log( `stdout: ${ibm.stdout.toString()}` );
 
       //target the right region and group
       console.log("Executing target...");
-      const ibm2 = spawnSync( 'ibmcloud', [ 'target', '-g', process.env.GROUP, '-r', process.env.REGION ] );
+      const ibm2 = spawnSync( 'ibmcloud', [ 'target', '-g', process.env.GROUP, '-r', process.env.REGION] );
 
       console.log( `stderr: ${ibm2.stderr.toString()}` );
       console.log( `stdout: ${ibm2.stdout.toString()}` );

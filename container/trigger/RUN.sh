@@ -5,12 +5,12 @@
 # COS_ID: If set, specifies the full CRN of a Cloud Object Storage instance to
 # use
 
-while getopts r:k:p:b:c:g:a option
+while getopts r:k:p:b:c:g:a: option
 do
 case "${option}"
 in
 r) REGISTRY=${OPTARG};;
-k) API_KEY=${OPTARG};;
+k) IAM_API_KEY=${OPTARG};;
 p) PROJECT_NAME=${OPTARG};;
 b) BUCKET=${OPTARG};;
 c) CID=${OPTARG};;
@@ -60,7 +60,7 @@ POLICY_ID=$(ibmcloud iam authorization-policy-create codeengine \
 
 # Create the app && save its URL for later
 ibmcloud ce app create -n cos-trigger --image ${REGISTRY}/trigger \
-  --min-scale=1 --max-scale=1 -e API_KEY=${API_KEY} -e PROJECT_NAME=${PROJECT_NAME} -e GROUP=${GROUP} -e REGION=${REGION}
+  --min-scale=1 --max-scale=1 -e IAM_API_KEY=${IAM_API_KEY} -e PROJECT_NAME=${PROJECT_NAME} -e GROUP=${GROUP} -e REGION=${REGION}
 
 
 # Setup the COS Event Source
