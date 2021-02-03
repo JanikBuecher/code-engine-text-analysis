@@ -5,7 +5,7 @@ Welcome to this little tutorial on how to scan files for computer viruses in the
 
 ## Architecture
 
-![](images/architecture.jpg =100x100)
+<img src="images/architecture.jpg" alt="drawing"/>
 
 ## Prerequisites
 
