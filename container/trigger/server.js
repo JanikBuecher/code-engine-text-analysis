@@ -70,9 +70,6 @@ app.post("/events/cos",function (req, res, next){
       console.log( `stdout: ${ibm5.stdout.toString()}` );
       res.end('OK')
     }
-   
-   
-
     
   } catch (error) {
     // Passes errors into the error handler
